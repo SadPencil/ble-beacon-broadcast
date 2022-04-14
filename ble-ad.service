@@ -1,0 +1,13 @@
+[Unit]
+Description=ble-ad
+After=bluetooth.target
+Wants=bluetooth.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/ble-ad/ble-ad.sh
+# This is ugly. But I don't know the correct way to wait for the bluetooth device, although "After=bluetooth.target" is set.
+ExecStartPre=/bin/sleep 10s
+
+[Install]
+WantedBy=multi-user.target
